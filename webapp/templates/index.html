@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> My Webapp for Python</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+        <style>
+            .container { 
+              height: 40px;
+              width: 1000px;
+              position: relative;
+              border: 2px solid grey; 
+            }
+            
+            .vertical-center {
+              margin: 3;
+              position: relative;
+              top: 50%;
+              -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <h1><a href="/history">History</a></h1>
+        <h1><a href="/home">Home</a></h1> -->
+        <form id="navigation" action="history" method="post">
+            <nav>
+            <p style="text-align:left">
+                <input name="home" type="submit" value="Home" id="home"/>
+                <input name="history" type="submit" value="History" id="history"/>
+                <input name="about" type="submit" value="About" id="about"/>
+            </p>
+            </nav>
+        </form>
+        <p style="text-align:left"> Please select a function to get GPT3 ideas (from Open AI)</p>
+        <p style="text-align:right"><img src="https://i0.wp.com/www.indiahci.org/2022/wp-content/uploads/2022/09/DigitalImpactSQ_Logo.png?w=200&ssl=1"></p>
+        <div class="container">
+            <div class="vertical-center">
+            <input type="radio" class="radio2" name="test2" id=b1 onclick="populate()">
+                <label for="b1">Hashtags</label>       |
+            <input type="radio" class="radio2" name="test2" id=b2 onclick="populate()">
+                <label for="b2">Email - Impact</label>      |
+            <input type="radio" class="radio2" name="test2" id=b3 onclick="populate()">
+                <label for="b3">Email - Investor</label>       |
+            <input type="radio" class="radio2" name="test2" id=b4 onclick="populate()">
+                <label for="b4">Motivation / Inspire</label>    |
+            <input type="radio" class="radio2" name="test2" id=b5 onclick="populate()">
+                <label for="b5">Other</label>
+            </div>
+          </div>
+        <form id="responsepage" action="idearesp" method="post"> 
+            <table align="left" border="0" cellpadding="0.2" cellspacing="0.2" style="height:83px; width:861px">
+                <tbody>
+                    <tr>
+                        <td>
+                        <h1 style="text-align:center"><textarea cols="100" name="name_input" id="prompttxt" rows="5">{{idearesp}}</textarea></h1>
+                        </td>
+                        <td>
+                        <p style="text-align:center"><input name="ideasresp" type="submit" value="Generate Ideas" id="idearesp"/></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <p style="text-align:left"><textarea cols="100" name="gptoutput" id="gpt3responseOPT" rows="20">{{gpt3responseOP}}</textarea></p>
+                        </td>
+                        <td>
+                        <p style="text-align:center"><input name="copy" type="button" value="Copy" id="idearesp2" onclick="copyTextFromElement()"/><a href="{{ url_for('index') }}" type="button">Clear Form</a>
+                            <!-- <input href="{{ url_for('index') }}" name="clear" type="submit" value="Clear" id="idearesp3"/> -->
+                        </p>
+                        <!-- <a href="{{ url_for('index') }}"><button>REFRESH</button></a> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+        </form>
+        <script>
+            //  #1  Populate prefilled options as input prompt
+               var disqcontext = "Digital Impact Square (DISQ), A Tata Consultancy Services (TCS) Foundation Initiative, is an open social innovation center - in the city of Nashik, Maharashtra. DISQ encourages innovation using digital technologies to address social challenges prevalent in Health and Hygiene, Housing and Transportation, Food and Agriculture, Energy, Water and Environment, Financial and Personal Security, Citizen Empowerment and Transparency, Education and Skills development across India. These challenges are drawn from the voice of citizens, domain experts, local administration and government. To know more about Digital Impact Square, watch video here Digital Impact Square: Is a living lab where research and technology from academia and industry influences everyday life Fosters a culture of innovation through a series of sustained innovation cycles Accelerates the journey of many from being ideators to entrepreneurs, researchers or corporate leaders.";
+               var hashtag = "Please create hashtags to inspire entrepreneurs to solve social challenges in India at DISQ.";
+               var emaili = "Write a sample email to share the quarterly impact report detailing the impact of each startups incubated at DISQ.";
+               var emailp = "Write a sample email to investors seeking investment in a social enterprise incubated at DISQ that works in the area of <enter domain here>";
+               var inspire = "Write a sample email or note that motivates young graduates to work on challenging social problems in India";
+               var other = "Please enter your input prompt to generate an idea";
+
+               function populate(){
+                if(document.getElementById("b1").checked){
+                    document.getElementById("prompttxt").value = disqcontext + hashtag;
+                } else if(document.getElementById("b2").checked){
+                    document.getElementById("prompttxt").value = disqcontext + emaili;
+                } else if(document.getElementById("b3").checked){
+                    document.getElementById("prompttxt").value = disqcontext + emailp;
+                } else if(document.getElementById("b4").checked){
+                    document.getElementById("prompttxt").value = disqcontext + inspire;
+                } else if(document.getElementById("b5").checked){
+                    document.getElementById("prompttxt").value = disqcontext + other;
+                }
+            }
+            //  #2  Copy GPT3Response and Clear form
+                function copyTextFromElement() {
+                    let element = document.getElementById('gpt3responseOPT'); //select the element
+                    let elementText = element.textContent; //get the text content from the element
+                    copyText(elementText); //use the copyText function below
+                }
+                    function copyText(elementText) {
+                    navigator.clipboard.writeText(elementText);
+                }
+                function clearform(){
+                    
+                }
+            </script>
+    </body>
+</html>

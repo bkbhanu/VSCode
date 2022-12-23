@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> My Webapp for Python</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    </head>
+    <body>
+        <nav>
+        <p style="text-align:left">
+            <input name="home" type="submit" value="Home" id="home"/>
+            <input name="history" type="submit" value="History" id="history"/>
+            <input name="about" type="submit" value="About" id="about"/>
+        </p>
+        </nav>
+        <p style="text-align:right"><img src="https://i0.wp.com/www.indiahci.org/2022/wp-content/uploads/2022/09/DigitalImpactSQ_Logo.png?w=200&ssl=1"></p>
+        <br>
+        <div class="container">
+         <form action="/history" method="post"> 
+            <br>
+            <div class="container">
+                <h1> Here is a *session* History of your queries</h1> 
+                <br/>
+                {{dtime}} | {{disoutput}}
+              </div>
+        </form>
+        
+    </body>
+</html>

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <H2>What do you want to do today?!</H2>
+    {{ inputprompt }}
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onchange="populate()">
+        <label class="btn btn-outline-primary" for="btnradio1">Hashtags</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onchange="populate()">
+        <label class="btn btn-outline-primary" for="btnradio2">Email - Impact</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onchange="populate()">
+        <label class="btn btn-outline-primary" for="btnradio3">Email - Investor</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" onchange="populate()">
+        <label class="btn btn-outline-primary" for="btnradio4">Motivation / Inspire</label>
+        
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" onchange="populate()">
+        <label class="btn btn-outline-primary" for="btnradio5">Other</label>
+      </div>
+      <br>
+      <br>
+    <form action="idearesp" method="get">
+      <div class="row g-2">
+          <div class="col-md">
+            <div class="mb-3">
+              <!-- <input type="text" class="form-control" name="testtext" id="newtest" value="How do you give such good answers?"> -->
+              <h1 style="text-align:center"><textarea cols="100" name="name_input" id="prompttxt" rows="5">{{idearesp}}</textarea></h1>
+              <!-- <label for="prompttxt" class="form-label" style="font-style: italic">Select an option above or enter a question/prompt</label>
+              <textarea class="form-control" name="input_data" id="prompttxt" rows="15" wrap="soft">{{idearesp}}</textarea> -->
+            </div>
+            <!-- <div class="form-floating">
+              <input type="email" class="form-control" id="prompttxt" placeholder="Select an option above or enter a question/prompt" style="height: 400px", style="text-align:left" value="">
+              <label for="floatingInputGrid">Input Prompt</label>
+            </div> -->
+          </div>
+          <div class="col-md">
+            <div class="mb-3">
+              <label for="gpt3responseOPT" class="form-label" style="font-style: italic" >Open AI Response</label>
+              <textarea class="form-control" name="output_data" id="gpt3responseOPT" rows="15" wrap="soft">{{gpt3responseOP}}</textarea>
+            </div>
+              <!-- <div class="form-floating">
+                  <input type="email" class="form-control" id="floatingInputGrid2" placeholder="Response from OpenAI to your query" style="height: 400px" value="">
+                  <label for="floatingInputGrid">Open AI Response</label>
+              </div> -->
+          </div>
+        </div>
+        <div class="row cols-12 justify-content-center">
+          <div class="col-6 justify-content-center">
+            <a href="{{ url_for('idearesp') }}" class="btn btn-primary btn-lg">Generate Ideas</a>
+            <!-- <button type="button" class="btn btn-primary btn-lg">Generate Ideas</button> -->
+          </div>
+          <div class="col-4 justify-content-center">
+            <button type="button" class="btn btn-primary btn-lg" onclick="copyresponse()">Copy Response</button>
+            <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">Clear Form</a>
+          </div>
+          <!-- <div class="col-2">
+            <button type="button" class="btn btn-primary btn-lg" onclick="home()">Clear form</button>
+          </div> -->
+        </div>
+    </form>
+
+    <script>
+      //  #1  Populate prefilled options as input prompt
+      var disqcontext = "Digital Impact Square (DISQ), A Tata Consultancy Services (TCS) Foundation Initiative, is an open social innovation center - in the city of Nashik, Maharashtra. DISQ encourages innovation using digital technologies to address social challenges prevalent in Health{{ url_for('history')}} and Hygiene, Housing and Transportation, Food and Agriculture, Energy, Water and Environment, Financial and Personal Security, Citizen Empowerment and Transparency, Education and Skills development across India. These challenges are drawn from the voice of citizens, domain experts, local administration and government. To know more about Digital Impact Square, watch video here Digital Impact Square: Is a living lab where research and technology from academia and industry influences everyday life Fosters a culture of innovation through a series of sustained innovation cycles Accelerates the journey of many from being ideators to entrepreneurs, researchers or corporate leaders.";
+      var hashtag = "Please create hashtags to inspire entrepreneurs to solve social challenges in India at DISQ.";
+      var emaili = "Write a sample email to share the quarterly impact report detailing the impact of each startups incubated at DISQ.";
+      var emailp = "Write a sample email to investors seeking investment in a social enterprise incubated at DISQ that works in the area of <enter domain here>";
+      var inspire = "Write a sample email or note that motivates young graduates to work on challenging social problems in India";
+      var other = "Please enter your input prompt to generate an idea";
+
+      function populate(){
+        if(document.getElementById("btnradio1").checked){
+                  document.getElementById("prompttxt").value = disqcontext + hashtag;
+              } else if(document.getElementById("btnradio2").checked){
+                  document.getElementById("prompttxt").value = disqcontext + emaili;
+              } else if(document.getElementById("btnradio3").checked){
+                  document.getElementById("prompttxt").value = disqcontext + emailp;
+              } else if(document.getElementById("btnradio4").checked){
+                  document.getElementById("prompttxt").value = disqcontext + inspire;
+              } else if(document.getElementById("btnradio5").checked){
+                  document.getElementById("prompttxt").value = disqcontext + other;
+              }
+      }
+
+      //  #2  Copy GPT3Response and Clear form
+      function copyresponse() {
+                  let element = document.getElementById('gpt3responseOPT'); //select the element
+                  let elementText = element.textContent; //get the text content from the element
+                  copyText(elementText); //use the copyText function below
+              }
+                  function copyText(elementText) {
+                  navigator.clipboard.writeText(elementText);
+              }
+
+    </script>
+{% endblock %}

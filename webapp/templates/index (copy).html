@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   
+    <head>
+        <meta charset="UTF-8">
+        <title> My Webapp for Python</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    </head>
+    <body>
+        <img src="https://media-exp1.licdn.com/dms/image/C510BAQEdOloQeGb4VA/company-logo_200_200/0/1584425567486?e=2147483647&v=beta&t=iOaXWAgba6VT7OUjIxJoyu5tGGmJa-dSbWS-MuW5ggQ">
+        <br>
+    <form action="idearesp" method="post"> 
+        {% for message in get_flashed_messages()%}
+            <p> {{message}} </p>
+        {% endfor %}
+        <table align="left" border="0" cellpadding="1" cellspacing="1" style="height:83px; width:861px">
+            <tbody>
+                <tr>
+                    <td><select name="selectpurpose"><option value="1">Hashtags</option><option value="2">Email Sample - Status Report</option><option value="3">Email Sample - Apply/Innovators</option><option value="4">Email Sample - Stakeholders</option></select></td>
+                    <td>
+                    <h1 style="text-align:center"><textarea cols="50" name="name_input" rows="5"></textarea></h1>
+        
+                    <p style="text-align:center"><input type="submit" value="Generate Ideas" id="idearesp" /></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                    <p style="text-align:center"><textarea cols="50" name="gpt3responseout" rows="5"></textarea></p>
+        
+                    <p style="text-align:center"><input name="copy" type="button" value="Copy" /><input name="clear" type="button" value="Clear" />&nbsp;</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    
+        <!-- <form action="idearesp" method="post"> 
+            {% for message in get_flashed_messages()%}
+                <p> {{message}} </p>
+            {% endfor %}
+            <br>
+            <input type="text" name="name_input">
+            <br>
+            <input type="submit" value="Generate Ideas" id="idearesp">
+        </form> -->
+    </body>
+</html>

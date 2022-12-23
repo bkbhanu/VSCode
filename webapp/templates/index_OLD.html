@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   
+    <head>
+        <meta charset="UTF-8">
+        <title> My Webapp for Python</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    </head>
+    <body>
+        <img src="https://media-exp1.licdn.com/dms/image/C510BAQEdOloQeGb4VA/company-logo_200_200/0/1584425567486?e=2147483647&v=beta&t=iOaXWAgba6VT7OUjIxJoyu5tGGmJa-dSbWS-MuW5ggQ">
+        <br>
+   
+        <form action="idearesp" method="post"> 
+            <!-- <br>
+            <input type="text" name="gpt3responseOP"> -->
+                <!-- {% for message in get_flashed_messages()%} -->
+                <!-- <p> {{message}} {{idearesp}} </p> -->
+                <!-- <p style="text-align:left"><b>Input Prompt:</b></p> -->
+                <p style="text-align:left"><label for="lblinput"><b>"Input Prompt:"</b></label></p>
+                <p style="text-align:left"><label for="inputprompt">{{idearesp}}</label></p>
+                <p style="text-align:left"><textarea cols="50" id="gpt3responseOPT" rows="5">{{gpt3responseOP}}</textarea></p>
+                <!-- Generated Idea: {{gpt3responseOP}} <br/> -->
+            <!-- {% endfor %} -->
+                        <br>
+            <input type="text" name="name_input">
+            <br>
+            <!-- <input type="text" name="gpt3responseOP">
+            <br> -->
+            <input type="submit" value="Generate Ideas" id="idearesp">
+        </form>
+    </body>
+</html>
